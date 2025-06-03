@@ -1,4 +1,3 @@
-
 import telebot
 import openai
 import os
@@ -26,12 +25,14 @@ def handle_message(message):
             thread_id=thread.id,
             assistant_id=ASSISTANT_ID
         )
-        result = openai.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
-        reply = f"نهج المنتقم يجاوبك:
-{result.status}"
+        result = openai.beta.threads.runs.retrieve(
+            thread_id=thread.id,
+            run_id=run.id
+        )
+        reply = f"نهج المنتقم يجاوبك: {result.status}"
     except Exception as e:
         reply = f"حدث خطأ: {e}"
-
+    
     bot.reply_to(message, reply)
 
 bot.polling()
